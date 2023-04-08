@@ -28,8 +28,7 @@ public:
                 l2=l2->next;
             }
             carry=sum/10;
-            sum=sum%10;
-            ptr->next=new ListNode(sum);
+            ptr->next=new ListNode(sum%10);
             ptr=ptr->next;
         }
         if(carry !=0)
