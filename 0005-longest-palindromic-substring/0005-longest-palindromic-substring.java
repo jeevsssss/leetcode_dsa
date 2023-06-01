@@ -1,45 +1,27 @@
 class Solution {
     public String longestPalindrome(String s) {
-        int currLen = 0, maxLen = 0;
-        int n = s.length();
-        String longestPalindrome = "";
-        
-        if(s.length() <= 1){
-            return s;
-        }
-        //Code for odd length palindrome
-        for(int centerIndex = 1; centerIndex < n - 1; centerIndex++){
-            int leftIndex = centerIndex - 1, rightIndex = centerIndex + 1;
-            //Continue while both the indices are in range and  characters are matching
-            while(leftIndex >= 0 && rightIndex < n && s.charAt(leftIndex) == s.charAt(rightIndex)){
-                leftIndex--;
-                rightIndex++;
-            }
-            //Calculate the current Palindrome length using formula (r - l + 1) 
-            currLen = (rightIndex - 1) - (leftIndex + 1) + 1 ;
-            //if curr length is greater than the maxLen we have, update longestPalindrome and maxLen
-            if(currLen > maxLen){
-                maxLen = currLen; 
-                longestPalindrome = s.substring(leftIndex + 1, rightIndex);
+        int n=s.length();
+        int start=0;int end=0;
+        for(int i=0;i<n;i++)
+        {
+            int odd=expand(s,i,i);
+            int even=expand(s,i,i+1);
+            int len=Math.max(odd,even);
+            if(len>end-start)
+            {
+                start=i-(len-1)/2;
+                end=i+len/2;
             }
         }
-        //Code for even length palindrome
-        for(int centerIndex = 0; centerIndex < n ; centerIndex++){
-            int leftIndex = centerIndex, rightIndex = centerIndex + 1;
-            while(leftIndex >= 0 && rightIndex < n && s.charAt(leftIndex) == s.charAt(rightIndex)){
-                leftIndex--;
-                rightIndex++;
-            }
-            currLen = (rightIndex - 1) - (leftIndex + 1) + 1 ;
-            if(currLen > maxLen){
-                maxLen = currLen; 
-                longestPalindrome = s.substring(leftIndex + 1, rightIndex);
-            }   
+        return s.substring(start,end+1);
+    }
+    public int expand(String s,int left,int right)
+    {
+        while(left>=0 && right<s.length() && s.charAt(left)==s.charAt(right))
+        {
+            left--;
+            right++;
         }
-        //If you didn't find any palindrome then return 1 length palidnrome
-        if(longestPalindrome.isEmpty()){
-            return s.substring(0,1);
-        }
-        return longestPalindrome;
+        return right-left-1;
     }
 }
