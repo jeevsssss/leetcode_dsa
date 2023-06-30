@@ -13,8 +13,7 @@ public class Solution
                 }
             }
             maxLength = Math.max(maxLength, dp[i]);
-        }
-        
+        } 
         return maxLength;
     }
 }
