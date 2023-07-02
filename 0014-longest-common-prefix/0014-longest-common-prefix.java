@@ -11,3 +11,5 @@ class Solution {
         return prefix;
     }
 }
+
+//so first take first string as prefix and then check if its in other strings . if not remove the last element in the prefix and try again
