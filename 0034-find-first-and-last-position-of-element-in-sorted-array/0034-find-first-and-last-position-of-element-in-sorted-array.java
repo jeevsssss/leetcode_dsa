@@ -1,30 +1,58 @@
-public class Solution {
+class Solution {
     public int[] searchRange(int[] nums, int target) {
-        if(nums==null || nums.length<1){
-            return new int[]{-1,-1};
-        }
         
-        int start=searchBinary(nums,target);
-        if(start==nums.length || nums[start]!=target){
-            return new int[]{-1,-1};
-        }
+        int[] result = new int[2];
+        result[0] = findFirst(nums,target);
+        result[1] = findLast(nums,target);
+        return result;
         
-        int end = searchBinary(nums,target+1);
-        return new int[]{start,end-1};
     }
     
-    public int searchBinary(int[] nums,int target){
-        int i=0;
-        int j=nums.length;
-        while(i<j){
-            int mid=(i+j)>>>1;
-            if(nums[mid]<target){
-                i=mid+1;
-            }else{
-                j=mid;
+    public int findFirst(int[] nums, int target){
+        int result = -1;
+        int low = 0;
+        int high = nums.length - 1;
+        while(low <= high)
+        {
+            int mid = low + ((high-low)/2);
+            if (nums[mid] < target)
+            {
+                low = mid +1;
+            }
+            else if (nums[mid] > target)
+            {
+                high = mid - 1;
+            } 
+            else
+            {
+                result = mid;
+                high = mid - 1; 
             }
         }
-        
-        return i;
+        return result;
+    }
+    public int findLast(int[] nums, int target)
+    {    
+        int result = -1;
+        int low = 0;
+        int high = nums.length - 1;
+        while(low <= high)
+        {    
+            int mid = low + (high-low)/2;   
+            if (nums[mid] < target)
+            {
+                low = mid +1;
+            }
+            else if(nums[mid] > target)
+            {
+                high = mid - 1;
+            }
+            else
+            {
+                result = mid;
+                low = mid + 1;
+            }
+        }
+        return result;
     }
 }
