@@ -1,11 +1,10 @@
 class Solution {
-    public int[] searchRange(int[] nums, int target) {
-        
+    public int[] searchRange(int[] nums, int target)
+    {
         int[] result = new int[2];
         result[0] = findFirst(nums,target);
         result[1] = findLast(nums,target);
-        return result;
-        
+        return result;   
     }
     
     public int findFirst(int[] nums, int target){
