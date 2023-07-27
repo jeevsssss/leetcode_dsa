@@ -1,23 +1,40 @@
-class Solution {
-    public int minDepth(TreeNode root) {
-        if (root == null) {
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution 
+{
+    public int minDepth(TreeNode root)
+    {
+        if(root == null)
+        {
             return 0;
         }
-
-        // If the current node is a leaf node, return 1
-        if (root.left == null && root.right == null) {
+        return helper(root);
+    }
+    public int helper(TreeNode root)
+    {
+        if(root == null)
+        {
+            return Integer.MAX_VALUE;
+        }
+        if(root.left == null && root.right == null)
+        {
             return 1;
         }
-
-        int leftDepth = minDepth(root.left);
-        int rightDepth = minDepth(root.right);
-
-        // If either left or right subtree is not present, consider the non-null one.
-        if (root.left == null || root.right == null) {
-            return Math.max(leftDepth, rightDepth) + 1;
-        }
-
-        // Both subtrees are present, return the minimum depth + 1
-        return Math.min(leftDepth, rightDepth) + 1;
+        int depthLeft = helper(root.left);
+        int depthRight = helper(root.right);
+        return Math.min(depthLeft, depthRight) + 1;
     }
 }
