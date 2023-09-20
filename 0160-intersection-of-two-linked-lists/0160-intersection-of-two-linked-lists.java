@@ -19,7 +19,8 @@ public class Solution {
             currentA = currentA.next;
         }
         ListNode currentB = headB;
-        while (currentB != null) {
+        while (currentB != null)
+        {
             if (set.contains(currentB))
             {
                 return currentB;
