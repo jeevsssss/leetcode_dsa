@@ -6,7 +6,7 @@ class Solution {
         {
             max = Math.max(max, x);
         }
-        List<Boolean> result = new ArrayList<>();
+        List<Boolean> result = new ArrayList<>(candies.length);
         // Add the candies they have with the extra candy and see if that makes them have more than the maximum candies someone has; if it does, then it's true, otherwise, it's false
         for (int y : candies) {
             result.add(y + extraCandies >= max);
