@@ -1,42 +1,26 @@
-class Solution 
-{
-    boolean isVowel(char c)
-    {
-        return c == 'a' || c == 'i' || c == 'e' || c == 'o' || c == 'u'
-            || c == 'A' || c == 'I' || c == 'E' || c == 'O' || c == 'U';
-    }
-    
-    void swap(char[] chars, int x, int y)
-    {
-        char temp = chars[x];
-        chars[x] = chars[y];
-        chars[y] = temp;
-    }
-    
-    public String reverseVowels(String s)
-    {
-        int start = 0;
-        int end = s.length() - 1;
-        // Convert String to char array as String is immutable in Java
-        char[] sChar = s.toCharArray();
-        
-        // While we still have characters to traverse
-        while (start < end) {
-            // Find the leftmost vowel
-            while (start < s.length () && !isVowel(sChar[start])) {
+class Solution {
+    public String reverseVowels(String s) {
+        char[] arr=s.toCharArray();
+        String vow="aeiouAEIOU";
+        int start=0;
+        int end=s.length()-1;
+        while(end>start)
+        {
+            while(end>start && vow.indexOf(arr[start])==-1)
+            {
                 start++;
             }
-            // Find the rightmost vowel
-            while (end >= 0 && !isVowel(sChar[end])) {
+            while(end>start && vow.indexOf(arr[end])==-1)
+            {
                 end--;
             }
-            // Swap them if start is left of end
-            if (start < end) {
-                swap(sChar, start++, end--);
-            }
+            char temp=arr[start];
+            arr[start]=arr[end];
+            arr[end]=temp;
+            start++;
+            end--;
         }
+        return new String(arr);
         
-        // Converting char array back to String
-        return new String(sChar);
     }
-};
+}
